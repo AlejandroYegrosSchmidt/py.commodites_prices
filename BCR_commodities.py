@@ -188,3 +188,7 @@ class BCR_commodities_prices:
 
         df = pd.DataFrame(bd)
         return df
+if __name__ == '__main__':
+    bcr = BCR_commodities_prices()
+    df = bcr.tabla_datos()
+    print(df)
