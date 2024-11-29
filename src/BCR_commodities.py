@@ -157,7 +157,6 @@ class BCR_commodities_prices:
             "fecha_cierre": [],
             "endpoint": []
         }
-
         for i in range(self.datafrom, self.datato):
             try:
                 datos = datatree(endpoint=i).commodities_prices()
@@ -177,7 +176,6 @@ class BCR_commodities_prices:
                         print(f"Datos incompletos o vacíos para el endpoint {i}")
             except Exception as e:
                 print(f"Error procesando el endpoint {i}: {e}")
-
         df = pd.DataFrame(bd)
         return df
     
