@@ -1,7 +1,7 @@
-import time
 import urllib
 import urllib.request
 from bs4 import BeautifulSoup
+import pandas as pd
 """
 Programa para extraer el precio de los commodities de la Bolsa de comercio de Rosario
 """
@@ -10,14 +10,12 @@ class datatree():
     def __init__(self,endpoint=None):
         self.endpoint = endpoint
         self.url = f'https://www.bcr.com.ar/es/mercados/mercado-de-granos/cotizaciones/cotizaciones-internacionales/chicagokansas-cme-group-{self.endpoint}'
-
     def bs4_soup(self):
         thepage = urllib.request.urlopen(self.url)
         soup = BeautifulSoup(thepage,"html.parser")
         fecha_cierre=soup.find(class_="c1",colspan="5")
         fecha_cierre = fecha_cierre.get_text()
         return soup, fecha_cierre
-
     def select_tabla(self):
         #### manejo de errores###
         # En ocasiones la pagina cambia el nombre de la tabla a ser extraída,
@@ -32,7 +30,6 @@ class datatree():
             except:
                 pass
         return td, tr,fecha_cierre
-
     def commodities_prices(self):
         td, tr,fecha_cierre = self.select_tabla()
         cantidad_tr_fila = len(tr)- 5  # cantidad de tr/filas en la tabla, se resta 3 tr que corresponden al encabezado de la tablas y 2 tr que corresponden al pie de la tabla
@@ -136,7 +133,6 @@ class datatree():
             contador += 1
         return datos
 
-import pandas as pd
 """
 Extrar datos bajo demanda
 # El endpoint son los numero finales que aparecen al final de la url
@@ -144,12 +140,8 @@ Extrar datos bajo demanda
 """
 class BCR_commodities_prices:
     def __init__(self):
-        """
-        Inicializa la clase con el rango de endpoints, pidiéndolos al usuario.
-        """
         self.datafrom = int(input("Ingrese el endpoint inicial: "))
         self.datato = int(input("Ingrese el endpoint final: "))
-
     def tabla_datos(self):
         """
         Obtiene los datos de commodities para el rango de endpoints y los organiza en un DataFrame.
@@ -188,7 +180,4 @@ class BCR_commodities_prices:
 
         df = pd.DataFrame(bd)
         return df
-if __name__ == '__main__':
-    bcr = BCR_commodities_prices()
-    df = bcr.tabla_datos()
-    print(df)
+    
