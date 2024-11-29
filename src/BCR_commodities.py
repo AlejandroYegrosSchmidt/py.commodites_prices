@@ -128,7 +128,7 @@ class datatree():
                 HarinaSoja_Chicago_6_X = HarinaSoja_Chicago_6_X + 13
                 HarinaSoja_Chicago_6_Y = HarinaSoja_Chicago_6_Y - 13
 
-            datos.append([fecha_contrato_futuro, TrigoChicago1, TrigoChicago2, MaizChicago3, SojaChicago4, AceiteSojaChicago5, HarinaSojaChicago6, fecha_cierre,self.endpoint])
+            datos.append([fecha_contrato_futuro , TrigoChicago1 , TrigoChicago2 , MaizChicago3 , SojaChicago4 , AceiteSojaChicago5 , HarinaSojaChicago6 , fecha_cierre , self.endpoint])
             #print(fecha_contrato_futuro, "-", TrigoChicago1, "-", TrigoChicago2, "-", MaizChicago3, "-", SojaChicago4,"-",AceiteSojaChicago5,"-",HarinaSojaChicago6,"-", fecha_cierre, 'Realizado', contador)
             contador += 1
         return datos
@@ -157,25 +157,24 @@ class BCR_commodities_prices:
             "fecha_cierre": [],
             "endpoint": []
         }
-        for i in range(self.datafrom, self.datato):
+        for enpoint in range(self.datafrom, self.datato):
             try:
-                datos = datatree(endpoint=i).commodities_prices()
-                # Validar que los datos tengan la longitud esperada
-                for _ in datos:
-                    if datos and len(datos[0]) >= 9:
-                        bd["fecha_contrato_futuro"].append(datos[0][0])
-                        bd["trigo_chicago_1"].append(datos[0][1])
-                        bd["trigo_chicago_2"].append(datos[0][2])
-                        bd["maiz_chicago_3"].append(datos[0][3])
-                        bd["soja_chicago_4"].append(datos[0][4])
-                        bd["aceite_soja_chicago_5"].append(datos[0][5])
-                        bd["harina_soja_chicago_6"].append(datos[0][6])
-                        bd["fecha_cierre"].append(datos[0][7])
-                        bd["endpoint"].append(datos[0][8])
-                    else:
-                        print(f"Datos incompletos o vacíos para el endpoint {i}")
+                datos = datatree(endpoint=enpoint).commodities_prices()
+                for fila in datos:
+                    fila = [fila]
+                    bd["fecha_contrato_futuro"].append(fila[0][0])
+                    bd["trigo_chicago_1"].append(fila[0][1])
+                    bd["trigo_chicago_2"].append(fila[0][2])
+                    bd["maiz_chicago_3"].append(fila[0][3])
+                    bd["soja_chicago_4"].append(fila[0][4])
+                    bd["aceite_soja_chicago_5"].append(fila[0][5])
+                    bd["harina_soja_chicago_6"].append(fila[0][6])
+                    bd["fecha_cierre"].append(fila[0][7])
+                    bd["endpoint"].append(fila[0][8])
+                else:
+                    print(f"Datos incompletos o vacíos para el endpoint {fila}")
             except Exception as e:
-                print(f"Error procesando el endpoint {i}: {e}")
+                print(f"Error procesando el endpoint {enpoint}: {e}")
         df = pd.DataFrame(bd)
         return df
     

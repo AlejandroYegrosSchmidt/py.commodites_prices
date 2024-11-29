@@ -4,7 +4,6 @@ if __name__ == '__main__':
     def run():
         bcr =  BCR_commodities_prices()
         precios = bcr.tabla_datos()
-        print(precios)
         return precios
     run()
 
