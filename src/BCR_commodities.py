@@ -134,7 +134,7 @@ class datatree():
         return datos
 
 """
-Extrar datos bajo demanda
+Extraer datos bajo demanda
 # El endpoint son los numero finales que aparecen al final de la url
 # 'https://www.bcr.com.ar/es/mercados/mercado-de-granos/cotizaciones/cotizaciones-internacionales/chicagokansas-cme-group-2953'
 """
@@ -172,9 +172,11 @@ class BCR_commodities_prices:
                     bd["fecha_cierre"].append(fila[0][7])
                     bd["endpoint"].append(fila[0][8])
                 else:
-                    print(f"Datos incompletos o vacíos para el endpoint {fila}")
+                    pass
+                    #print(f"Datos incompletos o vacíos para el endpoint {fila}")
             except Exception as e:
-                print(f"Error procesando el endpoint {enpoint}: {e}")
+                pass
+                #print(f"Error procesando el endpoint {enpoint}: {e}")
         df = pd.DataFrame(bd)
         return df
     
