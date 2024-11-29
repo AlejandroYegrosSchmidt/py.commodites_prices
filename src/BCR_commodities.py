@@ -177,7 +177,5 @@ class BCR_commodities_prices:
             except Exception as e:
                 pass
                 #print(f"Error procesando el endpoint {enpoint}: {e}")
-            df = pd.DataFrame(bd)
-            #print(df)
-        return df
+        return bd
     
