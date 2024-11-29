@@ -5,5 +5,5 @@ if __name__ == '__main__':
         bcr =  BCR_commodities_prices()
         precios = bcr.tabla_datos()
         return precios
-    run()
+    datos = run()
 
