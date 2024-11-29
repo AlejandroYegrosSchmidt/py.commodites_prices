@@ -1,4 +1,10 @@
 from BCR_commodities import BCR_commodities_prices
 
 if __name__ == '__main__':
-    BCR_commodities_prices().tabla_datos()
+    def run():
+        bcr =  BCR_commodities_prices()
+        precios = bcr.tabla_datos()
+        print(precios)
+        return precios
+    run()
+
